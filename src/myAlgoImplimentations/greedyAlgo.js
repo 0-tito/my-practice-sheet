@@ -33,7 +33,8 @@ export const statesNeeded = new Set([
    its ok if the station covers some states that have been covereed already
 2) repeat until all the states are covered */
 
-export function greedyAlgo(stations,statesNeeded){
+// TODO: Implement this function
+export function setCover(stations,statesNeeded){
    let  bestStation = undefined
  let statesCovered = new Set()
    for (const station in stations) {
@@ -48,8 +49,7 @@ export function greedyAlgo(stations,statesNeeded){
 }
 
 
-// NEXT PROBLEM
-//THE funiture delivery problem
+//THE FUNITURE DELIVERY PROBLEM
 
 // Function to calculate the total volume of a truck (assuming a fixed size)
 function calculateTruckVolume(length, width, height) {
@@ -106,8 +106,70 @@ const boxes = [
 ];
 
 // Call the function to pack the truck (you will implement this)
-const result = packTruck(truckDimensions, boxes);
+// const result = packTruck(truckDimensions, boxes);
 
-// Output the result (you can change this based on your implementation)
-console.log("Packed Boxes:", result.packedBoxes);
-console.log("Remaining Volume in Truck:", result.remainingVolume);
+// //Output the result (you can change this based on your implementation)
+// console.log("Packed Boxes:", result.packedBoxes);
+// console.log("Remaining Volume in Truck:", result.remainingVolume);
+
+
+
+//THE KNAPSACK PROBLEM
+/* Suppose you’re a greedy thief. You’re in a store with a knapsack,
+and there are all these items you can steal. But you can only take what you can fit in 
+your knapsack. 
+ The knapsack can hold 35 pounds.
+ You’re trying to maximize the value of the items you put in your knapsack. 
+ What algorithm do you use? */
+
+function packKnapsack(knapsackCapacity, items) {
+    // Variables to hold the result
+    const packedItems = [];
+    let remainingCapacity = knapsackCapacity;
+    let mostExpensivePackedItemValue = -Infinity
+    // TODO: Implement sorting and packing logic
+     items.sort((a,b) => a.weight- b.weight)
+     for (const item of items) {
+         if(item.value > mostExpensivePackedItemValue && item.weight <= remainingCapacity ){
+            console.log(mostExpensivePackedItemValue, "most expensive item value")
+            console.log(item.weight)
+        remainingCapacity -= item.weight
+       mostExpensivePackedItemValue = item.value
+        packedItems.push(item)
+         }
+        // if(item.weight <= remainingCapacity){
+        //     remainingCapacity -= item.weight
+        //     packedItems.push(item)
+        // }
+     }
+    
+     console.log(packedItems, remainingCapacity)
+     let packedItemsValue = packedItems.reduce((acc,curItem) => {
+       return acc + curItem.value
+     }, 0)
+
+    return {
+        packedItems,
+        remainingCapacity,
+        // TODO: Calculate total value of packed items
+        packedItemsValue,
+    };
+}
+
+// Example data structure usage
+const items = [
+    { weight: 10, value: 60 },
+    { weight: 20, value: 130 },
+    { weight: 15, value: 90 },
+    { weight: 21, value: 110 },
+];
+
+const knapsackCapacity = 60;
+
+// Call the function with your data structures
+const result = packKnapsack(knapsackCapacity, items);
+
+// TODO: Output the result
+console.log("packed items",result.packedItems)
+console.log("packed items",result.remainingCapacity)
+console.log("packed items",result.packedItemsValue)

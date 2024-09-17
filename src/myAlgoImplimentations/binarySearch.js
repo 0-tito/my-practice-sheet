@@ -14,7 +14,7 @@
        
       if(guess === item){
        return item
-      }
+      } 
       else if(guess > item){
        return recursiveStep(high = guess - 1)
       }

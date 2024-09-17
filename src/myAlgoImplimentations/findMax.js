@@ -1,21 +1,23 @@
 export const arayForFindMax = [1,5,7,9,34,8]
 
-// find max
+/* recursively looping through an unordered list,
+ to find the maxinum item(number)*/
 export function findMax(array){
     let tracker = -Infinity
-   function search(index){
+   function searchEachItem(index){
     // base case
     if(index >= array.length){
       return 
     }
+    // recursive case
     else{
-      // array[index] > tracker ? tracker = array[index] : undefined
       if(array[index] > tracker){
         tracker = array[index] 
       }
-      search(index + 1)
+      
+      searchEachItem(index + 1)
     }
    }
-    search(0)
+    searchEachItem(0)
     return tracker
   }

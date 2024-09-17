@@ -33,17 +33,14 @@
   
   
      let onProcessNode = () => {
-   // get node with lowest cost
+   // get node with lowest cost,that does not exist in processed
     let getLowestCostNode = (costs) => {
-      let lowestCost = Infinity
-      let lowestCostNode = undefined
-       for (let cost in costs) {
-         if( costs[cost] < lowestCost && !processed.includes(cost)){
-           lowestCost = costs[cost]
-           lowestCostNode = cost
-         }
-       }
-       return lowestCostNode
+let sortedCosts = Object.fromEntries(Object.entries(costs).sort( (a,b) => {
+  return a[1] - b[1]
+}))
+for (const cost in sortedCosts) {
+   if(!processed[cost]) return cost
+}
      }
      let node = getLowestCostNode(costs)
   
